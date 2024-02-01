@@ -96,21 +96,20 @@ const checkTodos = (checkBox) => {
 const deleteTodos = (deleteButton) => {
   let result = confirm('本当に削除してもよろしいですか？');
 
-  if(result){
-    const chosenTodo = deleteButton.closest('li');
+  if(!result) return;
+  const chosenTodo = deleteButton.closest('li');
 
-    if (chosenTodo.querySelector('input[type="checkbox"]').checked) {
-      doneItemCount -= 1;
-    }
-
-    todoList.removeChild(chosenTodo);
-
-    todoItemCount -= 1;
-    todoItemCountElement.textContent = `全てのタスク: ${todoItemCount}`
-    doneItemCountElement.textContent = `完了済み: ${doneItemCount}`
-    willItemCountElement.textContent = `未完了: ${todoItemCount - doneItemCount}`
+  if (chosenTodo.querySelector('input[type="checkbox"]').checked) {
+    doneItemCount -= 1;
   }
-};
+
+  todoList.removeChild(chosenTodo);
+
+  todoItemCount -= 1;
+  todoItemCountElement.textContent = `全てのタスク: ${todoItemCount}`
+  doneItemCountElement.textContent = `完了済み: ${doneItemCount}`
+  willItemCountElement.textContent = `未完了: ${todoItemCount - doneItemCount}`
+  };
 
 todoSubmit.addEventListener('click', evt => {
   evt.preventDefault();
